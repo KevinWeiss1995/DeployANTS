@@ -18,6 +18,7 @@ def test_model_deployment():
     
     monitor = NetworkMonitor(model)
     
+    
     attack_traffic = {
         "Fwd Packet Length Max": 50.0,
         "Fwd Packet Length Min": 44.0,
@@ -56,8 +57,49 @@ def test_model_deployment():
         "Avg Bwd Segment Size": 0.0,
         "Fwd Header Length": 61272
     }
+    
+
+    normal_traffic = {
+        "Fwd Packet Length Max": 1280.0,
+        "Fwd Packet Length Min": 40.0,
+        "Bwd Packet Length Min": 40.0,
+        "Flow Bytes/s": 800.0,
+        "Flow IAT Mean": 0.05,
+        "Flow IAT Min": 0.001,
+        "Fwd IAT Total": 10.0,
+        "Fwd IAT Mean": 0.05,
+        "Fwd IAT Min": 0.001,
+        "Bwd IAT Total": 10.0,
+        "Bwd IAT Mean": 0.05,
+        "Bwd IAT Std": 0.01,
+        "Bwd IAT Max": 0.1,
+        "Bwd IAT Min": 0.001,
+        "Fwd PSH Flags": 1,
+        "Bwd Header Length": 320,
+        "Fwd Packets/s": 20.0,
+        "Bwd Packets/s": 15.0,
+        "Min Packet Length": 40,
+        "Max Packet Length": 1280,
+        "Packet Length Mean": 500.0,
+        "Packet Length Std": 300.0,
+        "Packet Length Variance": 90000.0,
+        "FIN Flag Count": 1,
+        "SYN Flag Count": 1,
+        "RST Flag Count": 0,
+        "PSH Flag Count": 1,
+        "ACK Flag Count": 10,
+        "URG Flag Count": 0,
+        "CWE Flag Count": 0,
+        "ECE Flag Count": 0,
+        "Down/Up Ratio": 0.75,
+        "Average Packet Size": 500.0,
+        "Avg Fwd Segment Size": 600.0,
+        "Avg Bwd Segment Size": 400.0,
+        "Fwd Header Length": 320
+    }
 
     print("\nAnalyzing Attack Traffic Sample:")
+    monitor.analyze_traffic(normal_traffic)
     monitor.analyze_traffic(attack_traffic)
 
 if __name__ == "__main__":
