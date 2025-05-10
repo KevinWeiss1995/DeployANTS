@@ -1,0 +1,17 @@
+- name: syn_flood
+  indicators:
+    - feature: SYN Flag Count
+      min_value: 1000
+      max_value: inf
+      description: "Unusually high number of SYN flags"
+    - feature: Flow IAT Min
+      min_value: 0
+      max_value: 0.0001
+      description: "Very small packet intervals"
+  description: "SYN Flood attack detected with {SYN Flag Count:,} SYN packets and {Flow IAT Min:.6f}s intervals"
+  severity: high
+  mitigations: 
+    - "Enable SYN cookies"
+    - "Implement rate limiting"
+  references:
+    - "https://attack.mitre.org/techniques/T1499/002/" 

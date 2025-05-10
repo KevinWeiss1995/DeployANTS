@@ -1,0 +1,17 @@
+- name: udp_flood
+  indicators:
+    - feature: Flow Bytes/s
+      min_value: 10000
+      max_value: inf
+      description: "High bandwidth consumption"
+    - feature: Bwd Packets/s
+      min_value: 200
+      max_value: inf
+      description: "High packet rate"
+  description: "UDP Flood attack with {Flow Bytes/s:.1f} bytes/s and {Bwd Packets/s:.1f} packets/s"
+  severity: medium
+  mitigations:
+    - "Configure UDP flood protection"
+    - "Implement rate limiting on UDP ports"
+  references:
+    - "https://attack.mitre.org/techniques/T1498/001/" 

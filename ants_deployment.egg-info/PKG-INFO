@@ -1,0 +1,13 @@
+Metadata-Version: 2.1
+Name: ants-deployment
+Version: 0.1.0
+Requires-Dist: tensorflow>=2.12.0
+Requires-Dist: boto3>=1.26.0
+Requires-Dist: mlflow>=2.7.0
+Requires-Dist: python-dotenv>=1.0.0
+Requires-Dist: flask>=2.3.0
+Requires-Dist: gpt4all>=1.0.0
+Requires-Dist: pytest>=7.4.0
+Requires-Dist: numpy>=1.24.0
+Requires-Dist: requests>=2.31.0
+Requires-Dist: PySide6>=6.5.0

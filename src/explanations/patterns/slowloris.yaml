@@ -1,0 +1,17 @@
+- name: slowloris
+  indicators:
+    - feature: Flow Duration
+      min_value: 900  # 15 minutes
+      max_value: inf
+      description: "Long-lasting connections"
+    - feature: Flow Packets/s
+      min_value: 0
+      max_value: 1
+      description: "Very low packet rate"
+  description: "Slowloris attack detected with {duration:.1f}s connections and {packets_per_sec:.2f} packets/s"
+  severity: medium
+  mitigations:
+    - "Implement connection timeout"
+    - "Limit concurrent connections per IP"
+  references:
+    - "https://owasp.org/www-community/attacks/Slowloris" 
