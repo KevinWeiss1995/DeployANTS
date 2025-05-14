@@ -24,16 +24,12 @@ class TrafficAnalyzer(QObject):
             analysis_interval: How often to run analysis (seconds)
         """
         super().__init__()
-        
-        # Remove QApplication creation from here
         self.capture = NetworkCapture(interface)
         self.monitor = NetworkMonitor(model)
         self.window_size = window_size
         self.analysis_interval = analysis_interval
         self.packet_buffer = deque(maxlen=window_size)
         self.stop_flag = threading.Event()
-        
-        # Connect signal to slot
         self.alert_signal.connect(self._show_alert, Qt.ConnectionType.QueuedConnection)
         
         try:
@@ -68,7 +64,6 @@ class TrafficAnalyzer(QObject):
                 self.monitor.feature_names
             )
             
-            # Get initial explanation
             logger.info("Getting explanation...")
             initial_explanation = self.monitor.client.get_explanation(
                 data['features'],

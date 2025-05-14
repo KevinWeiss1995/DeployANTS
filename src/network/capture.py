@@ -44,7 +44,6 @@ class NetworkCapture:
     def get_features(self) -> Dict[str, float]:
         """Extract features from current packet queue"""
         features = {
-            # Flow-level features
             "Fwd Packet Length Max": 0.0,
             "Fwd Packet Length Min": float('inf'),
             "Bwd Packet Length Min": float('inf'),
@@ -52,7 +51,7 @@ class NetworkCapture:
             "Flow IAT Mean": 0.0,
             "Flow IAT Min": float('inf'),
             
-            # Forward direction features
+            # Forward features
             "Fwd IAT Total": 0.0,
             "Fwd IAT Mean": 0.0,
             "Fwd IAT Min": float('inf'),
@@ -60,7 +59,7 @@ class NetworkCapture:
             "Fwd Packets/s": 0.0,
             "Fwd Header Length": 0,
             
-            # Backward direction features
+            # Backward features
             "Bwd IAT Total": 0.0,
             "Bwd IAT Mean": 0.0,
             "Bwd IAT Std": 0.0,
@@ -136,8 +135,10 @@ class NetworkCapture:
             features["Bwd IAT Min"] = min(features["Bwd IAT Min"], packet_time - self.flow_start_time)
             
             if TCP in packet:  # Only process TCP flags if it's a TCP packet
-                tcp_flags = int(packet[TCP].flags)  # Convert FlagValue to int
-                features["Fwd PSH Flags"] += (tcp_flags & 0x08) >> 3  # Convert to 0/1
+
+                # Conversions
+                tcp_flags = int(packet[TCP].flags)
+                features["Fwd PSH Flags"] += (tcp_flags & 0x08) >> 3
                 features["Bwd Header Length"] += len(packet[TCP])
                 features["FIN Flag Count"] += (tcp_flags & 0x01)
                 features["SYN Flag Count"] += (tcp_flags & 0x02) >> 1
